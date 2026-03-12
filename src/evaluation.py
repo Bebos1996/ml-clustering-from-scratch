@@ -106,7 +106,8 @@ def silhouette_plot(dataset_df, clusters, mean_silhouette, input_colors):
 
     ax1.set_yticks([])  # Clear the yaxis labels / ticks
     ax1.set_xticks([-0.1, 0, 0.2, 0.4, 0.6, 0.8, 1])
-    plt.show()
+    plt.savefig(f"./../results/silhouette_plot_k_{len(clusters)}.png", dpi=300)
+    plt.close()
 
 #validazione esterna
 def assign_clusters_labels(dataset, clusters, class_col_name):
@@ -215,7 +216,8 @@ def elbow_method(dataset, class_name, iterations, max_centers):
     plt.xlabel("Numero K")
     plt.ylabel("Funzione di costo")
     plt.title("Elbow method")
-    plt.show()
+    plt.savefig("./../results/elbow_method.png", dpi=300)
+    plt.close()
     #substract one to get the correct index in list
     index = int(input("Insert the best K: "))-1
     return index, clusters_list[index], costs_list[index]
@@ -272,7 +274,8 @@ def visualize_assignments(dataset, input_colors, markers, markers_vec, features,
                 axs[row, col].scatter(instance[xdata_label], instance[ydata_label], c=colors_vec[idx], marker=markers_vec[idx])
     fig.legend(handles=create_legends_element(markers,dataset[class_col_name].unique()),loc='upper left')
     fig.suptitle('Assignments', fontsize=16)
-    plt.show()
+    plt.savefig(f"./../results/assignements_k_{len(clusters)}.png", dpi=300)
+    plt.close()
 
 dataset = pd.read_csv("./../data/Iris.csv")
 class_col_name = "Class"
